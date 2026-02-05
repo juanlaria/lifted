@@ -1,0 +1,42 @@
+/**
+ * Lifted - Base CSS Styles
+ *
+ * Optional CSS variables and utility classes for Lifted shadows.
+ */
+
+:root {
+  /* Shadow colors */
+  --lifted-color: hsl(220 3% 15%);
+  --lifted-color-dark: hsl(0 0% 100% / 0.1);
+
+  /* Configuration */
+  --lifted-intensity: 1;
+  --lifted-transition-duration: 150ms;
+  --lifted-transition-easing: cubic-bezier(0.2, 0.6, 0.3, 1);
+}
+
+/* Dark mode colors */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --lifted-color: var(--lifted-color-dark);
+  }
+}
+
+/* Base class for lifted elements */
+.lifted-box {
+  transition: box-shadow var(--lifted-transition-duration) var(--lifted-transition-easing);
+}
+
+/* Animated class */
+.lifted-animated {
+  transition: box-shadow var(--lifted-transition-duration) var(--lifted-transition-easing),
+    transform var(--lifted-transition-duration) var(--lifted-transition-easing);
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .lifted-box,
+  .lifted-animated {
+    transition: none;
+  }
+}
