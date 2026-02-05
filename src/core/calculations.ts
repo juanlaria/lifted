@@ -97,12 +97,14 @@ export function angleToOffsetRatios(angleDeg: number): { ratioX: number; ratioY:
  *
  * @param elevation - Value from -1 (inner shadow) to 1 (drop shadow)
  * @param lightAngle - Angle of light source in degrees
- * @param intensity - Overall intensity multiplier
+ * @param intensity - Opacity multiplier (default 1)
+ * @param scale - Size multiplier for offset and blur (default 1)
  */
 export function calculateShadowLayers(
   elevation: number,
   lightAngle: number = DEFAULT_LIGHT_ANGLE,
-  intensity: number = 1
+  intensity: number = 1,
+  scale: number = 1
 ): ShadowLayer[] {
   const clampedElevation = Math.max(-1, Math.min(1, elevation));
 
@@ -120,13 +122,13 @@ export function calculateShadowLayers(
 
   for (let i = 0; i < MAX_LAYERS; i++) {
     const layerIndex = i + 1;
-    const baseOffset = Math.pow(2, i);
+    const baseOffset = Math.pow(2, i) * scale; // Apply scale to base offset
 
     if (layerIndex <= activeLayerCount) {
       layers.push({
-        offsetX: baseOffset * ratioX * intensity * directionMultiplier,
-        offsetY: baseOffset * ratioY * intensity * directionMultiplier,
-        blur: baseOffset * intensity,
+        offsetX: baseOffset * ratioX * directionMultiplier,
+        offsetY: baseOffset * ratioY * directionMultiplier,
+        blur: baseOffset,
         spread: 0,
         opacity: BASE_OPACITY * intensity,
         inset: isInset,
@@ -134,9 +136,9 @@ export function calculateShadowLayers(
     } else if (layerIndex - 1 < activeLayerCount) {
       const partial = activeLayerCount - (layerIndex - 1);
       layers.push({
-        offsetX: baseOffset * ratioX * partial * intensity * directionMultiplier,
-        offsetY: baseOffset * ratioY * partial * intensity * directionMultiplier,
-        blur: baseOffset * partial * intensity,
+        offsetX: baseOffset * ratioX * partial * directionMultiplier,
+        offsetY: baseOffset * ratioY * partial * directionMultiplier,
+        blur: baseOffset * partial,
         spread: 0,
         opacity: BASE_OPACITY * partial * intensity,
         inset: isInset,

@@ -70,7 +70,8 @@ instance.destroy(); // Cleanup
 | `background` | `string` | — | Background color (CSS). Used to auto-calculate shadow color. |
 | `shadowColor` | `string` | — | Manual shadow color override (CSS color). |
 | `shadowColorDark` | `string` | — | Shadow color for dark mode when using auto-detect. |
-| `intensity` | `number` | `1` | Shadow intensity multiplier. `0.5` = subtle, `1` = normal, `2` = dramatic. |
+| `intensity` | `number` | `1` | Shadow opacity multiplier. `0.5` = lighter, `1` = normal, `2` = darker. |
+| `scale` | `number` | `1` | Shadow size multiplier. `0.5` = smaller/contained (~8px max), `1` = default (~16px max), `2` = larger/dramatic (~32px max). |
 | `animated` | `boolean` | `true` | Whether to animate shadow changes with transitions. Automatically disabled when using `lightSource="mouse"` for smooth tracking. |
 | `transitionDuration` | `number` | `150` | Transition duration in milliseconds. |
 | `children` | `React.ReactNode` | — | Content to render inside the component. |

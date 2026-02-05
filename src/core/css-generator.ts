@@ -40,12 +40,13 @@ export function generateShadow(
     shadowColor: shadowColorOverride,
     shadowColorDark,
     intensity = 1,
+    scale = 1,
     isDarkMode = false,
   } = options;
 
   const lightSource = normalizeLightSource(lightSourceProp);
   const lightAngle = calculateLightAngle(lightSource, elementBounds, mousePosition);
-  const baseLayers = calculateShadowLayers(elevation, lightAngle, intensity);
+  const baseLayers = calculateShadowLayers(elevation, lightAngle, intensity, scale);
 
   let shadowColor: string;
 

@@ -123,10 +123,19 @@ export interface LiftedBoxProps extends Omit<React.HTMLAttributes<HTMLElement>, 
   shadowColorDark?: string;
 
   /**
-   * Shadow intensity multiplier.
+   * Shadow intensity multiplier (affects opacity).
    * @default 1
    */
   intensity?: number;
+
+  /**
+   * Shadow size multiplier. Controls how large shadows can get.
+   * - 0.5 = smaller, more contained shadows (max ~8px)
+   * - 1 = default size (max ~16px)
+   * - 2 = larger, more dramatic shadows (max ~32px)
+   * @default 1
+   */
+  scale?: number;
 
   /**
    * Whether to animate shadow changes.
@@ -192,6 +201,7 @@ export interface VanillaLiftedBoxOptions {
   shadowColor?: string;
   shadowColorDark?: string;
   intensity?: number;
+  scale?: number;
   animated?: boolean;
   transitionDuration?: number;
   isDarkMode?: boolean;
@@ -249,6 +259,7 @@ export interface ShadowOptions {
   shadowColor?: string;
   shadowColorDark?: string;
   intensity?: number;
+  scale?: number;
   isDarkMode?: boolean;
 }
 

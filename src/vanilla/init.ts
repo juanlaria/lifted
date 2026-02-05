@@ -49,6 +49,7 @@ export function initLiftedBox(
         shadowColor: currentOptions.shadowColor,
         shadowColorDark: currentOptions.shadowColorDark,
         intensity: currentOptions.intensity ?? 1,
+        scale: currentOptions.scale ?? 1,
         isDarkMode: currentOptions.isDarkMode ?? false,
       },
       getBounds(),
