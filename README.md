@@ -71,7 +71,7 @@ instance.destroy(); // Cleanup
 | `shadowColor` | `string` | — | Manual shadow color override (CSS color). |
 | `shadowColorDark` | `string` | — | Shadow color for dark mode when using auto-detect. |
 | `intensity` | `number` | `1` | Shadow intensity multiplier. `0.5` = subtle, `1` = normal, `2` = dramatic. |
-| `animated` | `boolean` | `true` | Whether to animate shadow changes with transitions. |
+| `animated` | `boolean` | `true` | Whether to animate shadow changes with transitions. Automatically disabled when using `lightSource="mouse"` for smooth tracking. |
 | `transitionDuration` | `number` | `150` | Transition duration in milliseconds. |
 | `children` | `React.ReactNode` | — | Content to render inside the component. |
 
@@ -92,7 +92,7 @@ Plus all standard HTML div attributes (`className`, `style`, `onClick`, etc.).
   lightSource={{
     type: 'mouse',
     smoothing: 0.1,      // 0-1, lower = smoother movement
-    maxAngle: 30,        // Maximum angle deviation
+    maxAngle: 60,        // Maximum angle deviation (default: 60)
     fallbackAngle: -45,  // Angle when mouse unavailable
   }}
 />
