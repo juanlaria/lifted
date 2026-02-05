@@ -120,12 +120,14 @@ export const LiftedBox = forwardRef<HTMLElement, LiftedBoxProps>(
         baseStyle.backgroundColor = background;
       }
 
-      if (animated) {
+      // Don't animate when using mouse light source (causes choppy movement)
+      const shouldAnimate = animated && lightSource.type !== 'mouse';
+      if (shouldAnimate) {
         baseStyle.transition = generateTransition(transitionDuration);
       }
 
       return baseStyle;
-    }, [shadowResult.boxShadow, background, animated, transitionDuration, style]);
+    }, [shadowResult.boxShadow, background, animated, transitionDuration, style, lightSource.type]);
 
     return React.createElement(
       Component,

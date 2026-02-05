@@ -21,7 +21,7 @@ import type {
 export const MAX_LAYERS = 5;
 export const BASE_OPACITY = 0.075;
 export const DEFAULT_LIGHT_ANGLE = -45;
-export const DEFAULT_MAX_MOUSE_ANGLE = 30;
+export const DEFAULT_MAX_MOUSE_ANGLE = 60;
 
 // =============================================================================
 // Light Source Utilities
