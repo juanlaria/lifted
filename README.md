@@ -91,9 +91,7 @@ Plus all standard HTML div attributes (`className`, `style`, `onClick`, etc.).
 <LiftedBox
   lightSource={{
     type: 'mouse',
-    smoothing: 0.1,      // 0-1, lower = smoother movement
-    maxAngle: 60,        // Maximum angle deviation (default: 60)
-    fallbackAngle: -45,  // Angle when mouse unavailable
+    fallbackAngle: -45,  // Angle when mouse unavailable (default: -45)
   }}
 />
 

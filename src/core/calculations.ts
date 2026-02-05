@@ -65,18 +65,13 @@ export function calculateLightAngle(
       const deltaX = mousePosition.x - elementCenterX;
       const deltaY = mousePosition.y - elementCenterY;
 
+      // Calculate angle from element to mouse (light comes FROM mouse position)
+      // atan2 gives angle where 0 = right, 90 = down, -90 = up, 180/-180 = left
       const angleRad = Math.atan2(deltaY, deltaX);
-      let angleDeg = angleRad * (180 / Math.PI) + 180;
+      // Convert to degrees and flip 180° so shadow falls AWAY from light source
+      const angleDeg = angleRad * (180 / Math.PI) + 180;
 
-      const maxAngle = lightSource.maxAngle ?? DEFAULT_MAX_MOUSE_ANGLE;
-      const fallback = lightSource.fallbackAngle ?? DEFAULT_LIGHT_ANGLE;
-
-      let angleDiff = angleDeg - fallback;
-      while (angleDiff > 180) angleDiff -= 360;
-      while (angleDiff < -180) angleDiff += 360;
-      angleDiff = Math.max(-maxAngle, Math.min(maxAngle, angleDiff));
-
-      return fallback + angleDiff;
+      return angleDeg;
     }
 
     default:
