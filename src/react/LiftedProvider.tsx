@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Lifted - LiftedProvider Component
  *
