@@ -1,5 +1,5 @@
 {
-  "name": "lifted",
+  "name": "@juanlaria/lifted",
   "version": "0.1.0",
   "description": "Beautiful, realistic CSS shadows with layered depth - inspired by Josh Comeau & Tobias Ahlin",
   "keywords": [
@@ -43,13 +43,18 @@
     "dist",
     "README.md"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/juanlaria/lifted.git"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "vitest",
     "lint": "eslint src --ext ts,tsx",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
     "react": ">=17.0.0",
