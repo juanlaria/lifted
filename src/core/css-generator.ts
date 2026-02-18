@@ -45,8 +45,9 @@ export function generateShadow(
   } = options;
 
   const lightSource = normalizeLightSource(lightSourceProp);
+  const isAmbient = lightSource.type === 'ambient';
   const lightAngle = calculateLightAngle(lightSource, elementBounds, mousePosition);
-  const baseLayers = calculateShadowLayers(elevation, lightAngle, intensity, scale);
+  const baseLayers = calculateShadowLayers(elevation, lightAngle, intensity, scale, isAmbient);
 
   let shadowColor: string;
 

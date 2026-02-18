@@ -68,15 +68,23 @@ export interface CustomLightSource {
 }
 
 /**
+ * Ambient light source - creates even shadows on all sides.
+ * No directional offset, only blur. Perfect for "detaching" elements from their container.
+ */
+export interface AmbientLightSource {
+  type: 'ambient';
+}
+
+/**
  * Union of all light source types.
  */
-export type LightSource = StaticLightSource | MouseLightSource | CustomLightSource;
+export type LightSource = StaticLightSource | MouseLightSource | CustomLightSource | AmbientLightSource;
 
 /**
  * Shorthand light source prop type.
- * Can be a number (static angle), 'mouse', or full configuration.
+ * Can be a number (static angle), 'mouse', 'ambient', or full configuration.
  */
-export type LightSourceProp = number | 'mouse' | LightSource;
+export type LightSourceProp = number | 'mouse' | 'ambient' | LightSource;
 
 // =============================================================================
 // Component Props

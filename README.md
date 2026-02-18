@@ -66,7 +66,7 @@ instance.destroy(); // Cleanup
 |------|------|---------|-------------|
 | `elevation` | `number` | `0.3` | Elevation level from `-1` (max inner shadow) to `1` (max drop shadow). Negative = inset, zero = none, positive = raised. |
 | `as` | `keyof JSX.IntrinsicElements` | `'div'` | HTML element to render as (`'div'`, `'section'`, `'button'`, etc.). |
-| `lightSource` | `number \| 'mouse' \| LightSource` | `-45` | Light source configuration. Number = angle in degrees, `'mouse'` = follows cursor. |
+| `lightSource` | `number \| 'mouse' \| 'ambient' \| LightSource` | `-45` | Light source configuration. Number = angle in degrees, `'mouse'` = follows cursor, `'ambient'` = even shadow on all sides. |
 | `background` | `string` | — | Background color (CSS). Used to auto-calculate shadow color. |
 | `shadowColor` | `string` | — | Manual shadow color override (CSS color). |
 | `shadowColorDark` | `string` | — | Shadow color for dark mode when using auto-detect. |
@@ -103,6 +103,10 @@ Plus all standard HTML div attributes (`className`, `style`, `onClick`, etc.).
     angle: myAngleState,
   }}
 />
+
+// Ambient light - even shadow on all edges (no directional offset)
+// Great for "detaching" elements from their container
+<LiftedBox lightSource="ambient" elevation={0.5} />
 ```
 
 ### Elevation Values

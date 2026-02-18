@@ -42,6 +42,9 @@ export function normalizeLightSource(source: LightSourceProp | undefined): Light
       fallbackAngle: DEFAULT_LIGHT_ANGLE,
     };
   }
+  if (source === 'ambient') {
+    return { type: 'ambient' };
+  }
   return source;
 }
 
@@ -74,6 +77,9 @@ export function calculateLightAngle(
       return angleDeg;
     }
 
+    case 'ambient':
+      return 0; // Angle doesn't matter for ambient, offsets will be 0
+
     default:
       return DEFAULT_LIGHT_ANGLE;
   }
@@ -104,7 +110,8 @@ export function calculateShadowLayers(
   elevation: number,
   lightAngle: number = DEFAULT_LIGHT_ANGLE,
   intensity: number = 1,
-  scale: number = 1
+  scale: number = 1,
+  ambient: boolean = false
 ): ShadowLayer[] {
   const clampedElevation = Math.max(-1, Math.min(1, elevation));
 
@@ -122,12 +129,12 @@ export function calculateShadowLayers(
 
   for (let i = 0; i < MAX_LAYERS; i++) {
     const layerIndex = i + 1;
-    const baseOffset = Math.pow(2, i) * scale; // Apply scale to base offset
+    const baseOffset = Math.pow(2, i) * scale;
 
     if (layerIndex <= activeLayerCount) {
       layers.push({
-        offsetX: baseOffset * ratioX * directionMultiplier,
-        offsetY: baseOffset * ratioY * directionMultiplier,
+        offsetX: ambient ? 0 : baseOffset * ratioX * directionMultiplier,
+        offsetY: ambient ? 0 : baseOffset * ratioY * directionMultiplier,
         blur: baseOffset,
         spread: 0,
         opacity: BASE_OPACITY * intensity,
@@ -136,8 +143,8 @@ export function calculateShadowLayers(
     } else if (layerIndex - 1 < activeLayerCount) {
       const partial = activeLayerCount - (layerIndex - 1);
       layers.push({
-        offsetX: baseOffset * ratioX * partial * directionMultiplier,
-        offsetY: baseOffset * ratioY * partial * directionMultiplier,
+        offsetX: ambient ? 0 : baseOffset * ratioX * partial * directionMultiplier,
+        offsetY: ambient ? 0 : baseOffset * ratioY * partial * directionMultiplier,
         blur: baseOffset * partial,
         spread: 0,
         opacity: BASE_OPACITY * partial * intensity,
